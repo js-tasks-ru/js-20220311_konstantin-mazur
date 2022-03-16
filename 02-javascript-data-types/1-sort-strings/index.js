@@ -7,7 +7,7 @@
 export function sortStrings(arr, param = 'asc') {
   const result = [...arr];
     
-  return param === 'asc' 
+  return param !== 'desc' 
     ? result.sort((a, b) => compare(a, b))
     : result.sort((a, b) => compare(b, a));
 }
