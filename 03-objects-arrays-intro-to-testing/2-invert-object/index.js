@@ -5,7 +5,7 @@
  */
 export function invertObj(obj) {
   if (obj === undefined) {
-    return obj;
+    return;
   }
 
   let result = {};
