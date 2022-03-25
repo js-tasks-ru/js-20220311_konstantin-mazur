@@ -9,7 +9,6 @@ export default class ColumnChart {
     this.formatHeading = formatHeading;
 
     this.render();
-    this.initEventListeners();
   }
 
   update (data = []) {
@@ -31,7 +30,7 @@ export default class ColumnChart {
 
   getTemplate () {
     return `
-      <div class="column-chart" style="--chart-height: 50">
+      <div class="column-chart" style="--chart-height: ${this.chartHeight}">
         <div class="column-chart__title">
           ${this.label}
           <a href="${this.link}" class="column-chart__link">View all</a>
@@ -67,6 +66,4 @@ export default class ColumnChart {
     this.remove();
     this.element = null;
   }
-
-  initEventListeners () {}
 }
