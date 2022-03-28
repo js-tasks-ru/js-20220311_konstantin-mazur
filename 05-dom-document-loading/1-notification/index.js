@@ -10,7 +10,7 @@ export default class NotificationMessage {
   }
 
   build() {
-    let element = document.createElement('div');
+    const element = document.createElement('div');
     element.innerHTML = this.getTemplate();
     this.element = element.firstElementChild;
   }
