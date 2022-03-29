@@ -3,8 +3,8 @@ export default class SortableTable {
     this.headerConfig = headerConfig;
     this.data = data;
     this.sortFunctions = {};
-    this.sortFunctions['string'] = this.sortStrings;
-    this.sortFunctions['number'] = this.sortNumbers;
+    this.sortFunctions.string = this.sortStrings;
+    this.sortFunctions.number = this.sortNumbers;
 
     this.build();
   }
