@@ -32,10 +32,10 @@ export default class SortableTable {
     return `
       <div class="sortable-table">
         <div data-element="header" class="sortable-table__header sortable-table__row">
-          ${this.getHeaders().join('')};
+          ${this.getHeaders().join('')}
         </div>
         <div data-element="body" class="sortable-table__body">
-          ${this.getRows().join('')};
+          ${this.getRows().join('')}
         </div>
       </div>
     `;
@@ -73,7 +73,7 @@ export default class SortableTable {
   sortValues(arr, field, sortType = 'string', param = this.ASCSORT) {
     const sortDirection = param !== this.DESCSORT ? 1 : -1;
     const sortFunction = this.sortFunctions[sortType];
-    return [...arr].sort(sortFunction( field, sortDirection));
+    return [...arr].sort(sortFunction(field, sortDirection));
   }
 
   getHeaders() {
