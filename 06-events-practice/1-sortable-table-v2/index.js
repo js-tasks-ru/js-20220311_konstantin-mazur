@@ -6,7 +6,7 @@ export default class SortableTable {
     data = [],
     sorted = {
       id: headerConfig.find(item => item.sortable).id,
-      order: 'asc'
+      order: this.ASCSORT
     }
   } = {}) {
     this.headerConfig = headersConfig;
