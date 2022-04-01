@@ -15,11 +15,11 @@ export default class NotificationMessage {
     this.element = element.firstElementChild;
   }
 
-  show(targetElement) {
+  show(targetElement = document.body) {
     NotificationMessage.activeNotification?.remove();
     NotificationMessage.activeNotification = this;
 
-    (targetElement ?? document.body).append(this.element);
+    targetElement.append(this.element);
 
     this.timeoutId = setTimeout(() => this.remove(), this.duration);
   }
