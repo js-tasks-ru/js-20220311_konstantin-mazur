@@ -45,8 +45,9 @@ class Tooltip {
   }
 
   moveAt(pageX, pageY) {
-    this.element.style.left = pageX + 10 + 'px';
-    this.element.style.top = pageY + 10 + 'px';
+    const mouseOffset = 10;
+    this.element.style.left = pageX + mouseOffset + 'px';
+    this.element.style.top = pageY + mouseOffset + 'px';
   }
 
   remove() {
@@ -57,6 +58,7 @@ class Tooltip {
     this.element.remove();
     document.removeEventListener('pointerover', this.onPointerover);
     document.removeEventListener('pointerout', this.onPointerout);
+    document.removeEventListener('pointermove', this.onPointermove);
   }
 }
 
