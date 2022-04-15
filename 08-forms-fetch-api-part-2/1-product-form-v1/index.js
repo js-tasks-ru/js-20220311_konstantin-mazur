@@ -39,14 +39,7 @@ export default class ProductForm {
 
   submit = async event => {
     event.preventDefault();
-
-    const productObj = this.getFormData();
-    const json = JSON.stringify(productObj);
-    const url = new URL('api/rest/products', BACKEND_URL);
-
-    const [request, eventName] = this.productId ? [putJson, 'product-updated'] : [patchJson, 'product-saved'];
-    const result = await request(url, json);
-    this.element.dispatchEvent(new Event(eventName));
+    await this.save();
   }
 
   constructor (productId) {
@@ -94,34 +87,6 @@ export default class ProductForm {
     url.searchParams.append('id', this.productId);
 
     return fetchJson(url);
-  }
-    
-  getFormData() {
-    const { title, description, price, discount, subcategory, status, quantity } = this.subElements.productForm.elements;
-
-    const result = {
-      description: description.value,
-      discount: Number(discount.value),
-      images: [],
-      price: Number(price.value),
-      quantity: Number(quantity.value),
-      status: Number(status.value),
-      subcategory: subcategory.value,
-      title: title.value,
-    };
-
-    if (this.productId) {
-      result.id = this.productId;
-    }
-
-    const imageElements = this.subElements.imageListContainer.querySelectorAll('.sortable-list__item');
-
-    for (const imageElement of imageElements) {
-      const [urlElement, srcElement] = imageElement.children;
-      result.images.push({ url: urlElement.value, source: srcElement.value });
-    }
-
-    return result;
   }
 
   fillFormData() {
@@ -188,6 +153,44 @@ export default class ProductForm {
     }
 
     return optionElements;
+  }
+
+  async save() {
+    const productObj = this.getFormData();
+    const json = JSON.stringify(productObj);
+    const url = new URL('api/rest/products', BACKEND_URL);
+
+    const [request, eventName] = this.productId ? [putJson, 'product-updated'] : [patchJson, 'product-saved'];
+    const result = await request(url, json);
+    this.element.dispatchEvent(new Event(eventName));
+  }
+      
+  getFormData() {
+    const { title, description, price, discount, subcategory, status, quantity } = this.subElements.productForm.elements;
+
+    const result = {
+      description: description.value,
+      discount: Number(discount.value),
+      images: [],
+      price: Number(price.value),
+      quantity: Number(quantity.value),
+      status: Number(status.value),
+      subcategory: subcategory.value,
+      title: title.value,
+    };
+
+    if (this.productId) {
+      result.id = this.productId;
+    }
+
+    const imageElements = this.subElements.imageListContainer.querySelectorAll('.sortable-list__item');
+
+    for (const imageElement of imageElements) {
+      const [urlElement, srcElement] = imageElement.children;
+      result.images.push({ url: urlElement.value, source: srcElement.value });
+    }
+
+    return result;
   }
 
   getTemplate() {
